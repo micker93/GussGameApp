@@ -38,9 +38,10 @@
             android:layout_marginTop="20dp"
             android:layout_width="246dp"
             android:layout_height="wrap_content"
-            android:inputType="text"
             android:ems="10"
-            android:id="@+id/editText" />
+            android:id="@+id/editText"
+            android:digits="ABCDEFGHIJKLMNOPQRSTUVWXYZÅÄÖabcdefghijklmnopqrstuvwxyzåäö"
+            android:inputType="textFilter"/>
 
         <Button
             android:layout_marginTop="20dp"

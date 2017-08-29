@@ -83,8 +83,15 @@ public class HardActivity extends AppCompatActivity {
         }
         else if(imageView.getDrawable().getConstantState() == getResources().getDrawable( R.drawable.kirurg).getConstantState()) {
 
+
             imageView.setImageResource(R.drawable.frekvens);
 
+            if(score>2) {
+                String finalscore = String.valueOf(score);
+                Intent intent = new Intent(getBaseContext(), ScoreScreen.class);
+                intent.putExtra("final", finalscore);
+                startActivity(intent);
+            }
         }
 
 
