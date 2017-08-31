@@ -6,6 +6,7 @@ import android.graphics.Color;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -18,7 +19,9 @@ import java.util.Random;
 public class HardActivity extends AppCompatActivity {
 
     int score=0;
+    int rightanwser=0;
     ArrayList<Integer> image=new ArrayList<Integer>();
+    ArrayList<String> anwser=new ArrayList<String>();
     Random pos=new Random();
 
     @Override
@@ -36,7 +39,6 @@ public class HardActivity extends AppCompatActivity {
 
                 startActivity(new Intent(getBaseContext(),MainActivity.class));
 
-
             }
         });
 
@@ -44,105 +46,83 @@ public class HardActivity extends AppCompatActivity {
         builder.create();
         builder.show();
 
+        score=0;
+
         Button button=(Button)findViewById(R.id.button1);
         button.setVisibility(View.GONE);
 
         image.add(R.drawable.frekvens);
+        anwser.add("frekvens");
         image.add(R.drawable.kirurg);
+        anwser.add("kirurg");
         image.add(R.drawable.kongress);
+        anwser.add("kongress");
 
         ImageView imageView=(ImageView) findViewById(R.id.imageView4);
-        imageView.setImageResource(image.get(pos.nextInt(image.size())));
 
-        score=0;
+        rightanwser=(pos.nextInt(anwser.size()));
+        imageView.setImageResource(image.get(rightanwser));
 
     }
 
 
     public void nextbutton(View v){
 
-        EditText editText=(EditText)findViewById(R.id.editText);
-        TextView textView=(TextView)findViewById(R.id.textView);
-        ImageView imageView = (ImageView) findViewById(R.id.imageView4);
+               EditText editText = (EditText) findViewById(R.id.editText);
+               TextView textView = (TextView) findViewById(R.id.textView);
+               ImageView imageView = (ImageView) findViewById(R.id.imageView4);
 
-        textView.setText("");
-        editText.setText("");
+               textView.setText("");
+               editText.setText("");
 
-        Button button=(Button)findViewById(R.id.button1);
-        button.setVisibility(View.GONE);
+               Button button = (Button) findViewById(R.id.button1);
+               button.setVisibility(View.GONE);
 
-        if(imageView.getDrawable().getConstantState() == getResources().getDrawable( R.drawable.frekvens).getConstantState()) {
+               rightanwser = (pos.nextInt(anwser.size()));
+               imageView.setImageResource(image.get(rightanwser));
 
-            imageView.setImageResource(R.drawable.kongress);
-
-        }
-        else if(imageView.getDrawable().getConstantState() == getResources().getDrawable( R.drawable.kongress).getConstantState()) {
-
-            imageView.setImageResource(R.drawable.kirurg);
-
-        }
-        else if(imageView.getDrawable().getConstantState() == getResources().getDrawable( R.drawable.kirurg).getConstantState()) {
-
-
-            imageView.setImageResource(R.drawable.frekvens);
-
-            if(score>2) {
-                String finalscore = String.valueOf(score);
-                Intent intent = new Intent(getBaseContext(), ScoreScreen.class);
-                intent.putExtra("final", finalscore);
-                startActivity(intent);
-            }
-        }
 
 
     }
 
     public void quessbutton(View v){
 
-        ImageView imageView=(ImageView) findViewById(R.id.imageView4);
         EditText editText=(EditText)findViewById(R.id.editText);
-        TextView textView=(TextView)findViewById(R.id.textView);
-
-        String text=editText.getText().toString();
-
-        if(imageView.getDrawable().getConstantState() == getResources().getDrawable( R.drawable.kongress).getConstantState()
-           && text.equals("kongress") ){
-
-            repeatmethod(v);
-
-        }
-        else if(imageView.getDrawable().getConstantState() == getResources().getDrawable( R.drawable.frekvens).getConstantState()
-             && text.equals("frekvens") ){
-
-            repeatmethod(v);
-
-        }
-        else if(imageView.getDrawable().getConstantState() == getResources().getDrawable( R.drawable.kirurg).getConstantState()
-             && text.equals("kirurg") || text.equals("tandare") ){
-
-            repeatmethod(v);
-
-        }
-        else {
-            textView.setTextColor(Color.RED);
-            textView.setText("Fel");
-        }
-    }
-
-    public void repeatmethod(View v){
-
         TextView textView=(TextView)findViewById(R.id.textView);
         TextView textView2=(TextView)findViewById(R.id.textView4);
         Button button=(Button)findViewById(R.id.button1);
 
-        button.setVisibility(View.VISIBLE);
+        Log.d("*"+(editText.getText().toString())+"*", "-"+anwser.get(rightanwser)+"-");
 
-        textView.setTextColor(Color.GREEN);
-        textView.setText("Rätt!");
-        score++;
-        textView2.setText("Poäng " + score);
 
+        if(editText.getText().toString().equals(anwser.get(rightanwser))){
+
+            Log.d("rätt ", "rätt");
+            button.setVisibility(View.VISIBLE);
+
+            textView.setTextColor(Color.GREEN);
+            textView.setText("Rätt!");
+            score++;
+            textView2.setText("Poäng " + score);
+
+
+            image.remove(rightanwser);
+            anwser.remove(rightanwser);
+
+            if (image.size()==0){
+
+                Intent intent= new Intent(this,ScoreScreen.class);
+                startActivity(intent);
+            }
+
+
+        }
+
+        else {
+
+            textView.setTextColor(Color.RED);
+            textView.setText("Fel");
+        }
     }
-
 
 }
