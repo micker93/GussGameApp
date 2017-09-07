@@ -72,6 +72,12 @@
             android:textColor="@color/colorPrimaryDark"
             android:background="@android:color/background_light"
             android:onClick="nextbutton"/>
+        <TextView
+            android:textAlignment="center"
+            android:textSize="20dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/texttips" />
 
     </LinearLayout>
 

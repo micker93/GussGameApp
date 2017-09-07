@@ -88,6 +88,7 @@ public class EasyActivity extends AppCompatActivity {
         EditText editText=(EditText)findViewById(R.id.editText);
         TextView textView=(TextView)findViewById(R.id.textView);
         TextView textView2=(TextView)findViewById(R.id.textView4);
+        TextView textView1=(TextView)findViewById(R.id.texttips);
         Button button=(Button)findViewById(R.id.button1);
 
         Log.d("*"+(editText.getText().toString())+"*", "-"+anwser.get(rightanwser)+"-");
@@ -102,6 +103,7 @@ public class EasyActivity extends AppCompatActivity {
             textView.setText("Rätt!");
             score++;
             textView2.setText("Poäng " + score);
+            textView1.setText("");
 
 
             image.remove(rightanwser);
@@ -122,6 +124,18 @@ public class EasyActivity extends AppCompatActivity {
             textView.setTextColor(Color.RED);
             textView.setText("Fel");
             editText.setText("");
+
+            switch (image.get(rightanwser)) {
+                case R.drawable.apelsin:
+                    textView1.setText("Ledtråd: Frukt");
+                    break;
+                case R.drawable.tandare:
+                    textView1.setText("Ledtråd: Används för att tända");
+                    break;
+                case R.drawable.brandbil:
+                    textView1.setText("Ledtråd: Finns i brandstationer");
+                    break;
+            }
         }
     }
 
