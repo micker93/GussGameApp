@@ -32,7 +32,7 @@
             android:id="@+id/textt2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Poäng: "
+            android:text="Rätt: "
             android:textSize="30dp"
             android:layout_gravity="center"
             android:layout_marginTop="4dp"

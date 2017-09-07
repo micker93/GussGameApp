@@ -31,7 +31,7 @@ public class NormalActivity extends AppCompatActivity {
 
         AlertDialog.Builder builder = new AlertDialog.Builder(NormalActivity.this);
         builder.setTitle("Börja spelet!");
-        builder.setMessage("Tryck på fortsätt för att starta spelet");
+        builder.setMessage("Tryck på börja för att starta spelet. Eller tillbacka för att komma till startsidan");
         builder.setPositiveButton("Tillbacka", new DialogInterface.OnClickListener(){
 
             public void onClick(DialogInterface dialog, int press){
@@ -108,6 +108,7 @@ public class NormalActivity extends AppCompatActivity {
             if (image.size()==0){
 
                 Intent intent= new Intent(this,ScoreScreen.class);
+                intent.putExtra("SCORE", score);
                 startActivity(intent);
             }
 
@@ -118,6 +119,7 @@ public class NormalActivity extends AppCompatActivity {
 
             textView.setTextColor(Color.RED);
             textView.setText("Fel");
+            editText.setText("");
         }
     }
 }

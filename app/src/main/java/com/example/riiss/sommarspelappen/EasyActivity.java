@@ -32,7 +32,7 @@ public class EasyActivity extends AppCompatActivity {
 
         AlertDialog.Builder builder = new AlertDialog.Builder(EasyActivity.this);
         builder.setTitle("Börja spelet!");
-        builder.setMessage("Tryck på fortsätt för att starta spelet");
+        builder.setMessage("Tryck på börja för att starta spelet. Eller tillbacka för att komma till startsidan");
         builder.setPositiveButton("Tillbacka", new DialogInterface.OnClickListener(){
 
             public void onClick(DialogInterface dialog, int press){
@@ -43,7 +43,7 @@ public class EasyActivity extends AppCompatActivity {
             }
         });
 
-        builder.setNegativeButton("Fortsätt" , null);
+        builder.setNegativeButton("Börja" , null);
         builder.create();
         builder.show();
 
@@ -110,6 +110,7 @@ public class EasyActivity extends AppCompatActivity {
             if (image.size()==0){
 
                 Intent intent= new Intent(this,ScoreScreen.class);
+                intent.putExtra("SCORE", score);
                 startActivity(intent);
             }
 
@@ -120,6 +121,7 @@ public class EasyActivity extends AppCompatActivity {
 
             textView.setTextColor(Color.RED);
             textView.setText("Fel");
+            editText.setText("");
         }
     }
 

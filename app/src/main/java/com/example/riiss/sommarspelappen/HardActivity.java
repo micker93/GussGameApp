@@ -18,11 +18,11 @@ import java.util.Random;
 
 public class HardActivity extends AppCompatActivity {
 
-    int score=0;
-    int rightanwser=0;
-    ArrayList<Integer> image=new ArrayList<Integer>();
-    ArrayList<String> anwser=new ArrayList<String>();
-    Random pos=new Random();
+    int score = 0;
+    int rightanwser = 0;
+    ArrayList<Integer> image = new ArrayList<Integer>();
+    ArrayList<String> anwser = new ArrayList<String>();
+    Random pos = new Random();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,24 +31,23 @@ public class HardActivity extends AppCompatActivity {
 
         AlertDialog.Builder builder = new AlertDialog.Builder(HardActivity.this);
         builder.setTitle("Börja spelet!");
-        builder.setMessage("Tryck på fortsätt för att starta spelet. Efter du har skrivi in svaret och det är rätt så" +
-                "dyker det en kanpp där du kan fortsätta till nästa bild.");
-        builder.setPositiveButton("Tillbacka", new DialogInterface.OnClickListener(){
+        builder.setMessage("Tryck på börja för att starta spelet. Eller tillbacka för att komma till startsidan");
+        builder.setPositiveButton("Tillbacka", new DialogInterface.OnClickListener() {
 
-            public void onClick(DialogInterface dialog, int press){
+            public void onClick(DialogInterface dialog, int press) {
 
-                startActivity(new Intent(getBaseContext(),MainActivity.class));
+                startActivity(new Intent(getBaseContext(), MainActivity.class));
 
             }
         });
 
-        builder.setNegativeButton("Fortsätt" , null);
+        builder.setNegativeButton("Börja", null);
         builder.create();
         builder.show();
 
-        score=0;
+        score = 0;
 
-        Button button=(Button)findViewById(R.id.button1);
+        Button button = (Button) findViewById(R.id.button1);
         button.setVisibility(View.GONE);
 
         image.add(R.drawable.frekvens);
@@ -58,44 +57,44 @@ public class HardActivity extends AppCompatActivity {
         image.add(R.drawable.kongress);
         anwser.add("kongress");
 
-        ImageView imageView=(ImageView) findViewById(R.id.imageView4);
+        ImageView imageView = (ImageView) findViewById(R.id.imageView4);
 
-        rightanwser=(pos.nextInt(anwser.size()));
+        rightanwser = (pos.nextInt(anwser.size()));
         imageView.setImageResource(image.get(rightanwser));
 
     }
 
 
-    public void nextbutton(View v){
+    public void nextbutton(View v) {
 
-               EditText editText = (EditText) findViewById(R.id.editText);
-               TextView textView = (TextView) findViewById(R.id.textView);
-               ImageView imageView = (ImageView) findViewById(R.id.imageView4);
+        EditText editText = (EditText) findViewById(R.id.editText);
+        TextView textView = (TextView) findViewById(R.id.textView);
+        ImageView imageView = (ImageView) findViewById(R.id.imageView4);
 
-               textView.setText("");
-               editText.setText("");
+        textView.setText("");
+        editText.setText("");
 
-               Button button = (Button) findViewById(R.id.button1);
-               button.setVisibility(View.GONE);
+        Button button = (Button) findViewById(R.id.button1);
+        button.setVisibility(View.GONE);
 
-               rightanwser = (pos.nextInt(anwser.size()));
-               imageView.setImageResource(image.get(rightanwser));
-
-
+        rightanwser = (pos.nextInt(anwser.size()));
+        imageView.setImageResource(image.get(rightanwser));
 
     }
 
-    public void quessbutton(View v){
+    public void quessbutton(View v) {
 
-        EditText editText=(EditText)findViewById(R.id.editText);
-        TextView textView=(TextView)findViewById(R.id.textView);
-        TextView textView2=(TextView)findViewById(R.id.textView4);
-        Button button=(Button)findViewById(R.id.button1);
+        EditText editText = (EditText) findViewById(R.id.editText);
+        TextView textView = (TextView) findViewById(R.id.textView);
+        TextView textView2 = (TextView) findViewById(R.id.textView4);
+        TextView textView1 = (TextView) findViewById(R.id.texttips);
+        ImageView imageView = (ImageView) findViewById(R.id.imageView4);
+        Button button = (Button) findViewById(R.id.button1);
 
-        Log.d("*"+(editText.getText().toString())+"*", "-"+anwser.get(rightanwser)+"-");
+        Log.d("*" + (editText.getText().toString()) + "*", "-" + anwser.get(rightanwser) + "-");
 
 
-        if(editText.getText().toString().equals(anwser.get(rightanwser))){
+        if (editText.getText().toString().equals(anwser.get(rightanwser))) {
 
             Log.d("rätt ", "rätt");
             button.setVisibility(View.VISIBLE);
@@ -104,24 +103,35 @@ public class HardActivity extends AppCompatActivity {
             textView.setText("Rätt!");
             score++;
             textView2.setText("Poäng " + score);
+            textView1.setText("");
 
 
             image.remove(rightanwser);
             anwser.remove(rightanwser);
 
-            if (image.size()==0){
+            if (image.size() == 0) {
 
-                Intent intent= new Intent(this,ScoreScreen.class);
+                Intent intent = new Intent(this, ScoreScreen.class);
+                intent.putExtra("SCORE", score);
                 startActivity(intent);
             }
-
-
-        }
-
-        else {
+        } else {
 
             textView.setTextColor(Color.RED);
             textView.setText("Fel");
+            editText.setText("");
+
+            switch (image.get(rightanwser)) {
+                case R.drawable.kirurg:
+                    textView1.setText("Ledtråd: jobbar på akuten");
+                    break;
+                case R.drawable.kongress:
+                    textView1.setText("Ledtråd: Lagstifning");
+                    break;
+                case R.drawable.frekvens:
+                    textView1.setText("Ledtråd: Repeterande händelser");
+                    break;
+            }
         }
     }
 

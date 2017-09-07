@@ -14,13 +14,23 @@
     android:weightSum="1">
 
     <TextView
-        android:text="Välkommen till GuessGame"
-        android:textSize="25dp"
+        android:text="Välkommen till"
+        android:textSize="40dp"
         android:gravity="center"
         android:textStyle="bold"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/textView2" />
+
+    <TextView
+        android:text="GuessGamE"
+        android:textSize="60dp"
+        android:gravity="center"
+        android:textStyle="bold"
+        android:textColor="@color/colorAccent"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/textView22" />
 
     <TextView
         android:text="Börja med att välja svårighetsgrad som kommer att ta dig till nästa sida där spelet börjar. Lycka till!"
@@ -69,6 +79,7 @@
             android:layout_height="wrap_content"
             android:id="@+id/textview5"
             android:textSize="20dp"
+            android:layout_centerHorizontal="true"
             android:layout_alignParentBottom="true"  />
     </RelativeLayout>
 </LinearLayout>

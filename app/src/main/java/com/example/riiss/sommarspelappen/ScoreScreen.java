@@ -16,13 +16,10 @@ public class ScoreScreen extends AppCompatActivity {
         TextView textView=(TextView)findViewById(R.id.score);
 
         Intent intent = getIntent();
-        String Easymessage= intent.getStringExtra("final");
-        String Normalmessage= intent.getStringExtra("final");
-        String Hardmessage= intent.getStringExtra("final");
 
-        textView.setText(Easymessage);
-        textView.setText(Normalmessage);
-        textView.setText(Hardmessage);
+        int score= intent.getIntExtra("SCORE",0);
+
+        textView.setText(String.valueOf(score));
     }
 
 
