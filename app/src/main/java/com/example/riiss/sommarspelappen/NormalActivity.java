@@ -8,6 +8,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -128,12 +129,18 @@ public class NormalActivity extends AppCompatActivity {
                     textView1.setText("Ledtråd: Anpassa en apparat till en annan appara");
                     break;
                 case R.drawable.laptop:
-                    textView1.setText("Ledtråd: Dator man kan med sig");
+                    textView1.setText("Ledtråd: bärbar dator");
                     break;
                 case R.drawable.skjuttmatt:
                     textView1.setText("Ledtråd: Man mäter med");
                     break;
             }
         }
+
+        InputMethodManager inputManager = (InputMethodManager)
+                getSystemService(this.INPUT_METHOD_SERVICE);
+
+        inputManager.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(),
+                InputMethodManager.HIDE_NOT_ALWAYS);
     }
 }

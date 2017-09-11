@@ -60,8 +60,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Till Startsidan"
-            android:textSize="20dp"
+            android:textSize="50dp"
+            android:textColor="#0B0B09"
+            android:background="#FFAB00"
             android:onClick="homepage"
-            android:layout_gravity="center"/>
+            android:layout_gravity="center"
+            android:scrollbarStyle="insideOverlay"/>
     </LinearLayout>
 </LinearLayout>
