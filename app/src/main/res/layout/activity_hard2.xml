@@ -22,7 +22,8 @@
         android:layout_width="358dp"
         android:layout_height="225dp"
         android:id="@+id/imageView4"
-        android:adjustViewBounds="true" />
+        android:adjustViewBounds="true"
+        android:layout_gravity="center"/>
 
 
     <LinearLayout

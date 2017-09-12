@@ -43,7 +43,7 @@ public class NormalActivity extends AppCompatActivity {
             }
         });
 
-        builder.setNegativeButton("Fortsätt" , null);
+        builder.setNegativeButton("Börja" , null);
         builder.create();
         builder.show();
 
